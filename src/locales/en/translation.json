@@ -291,5 +291,81 @@
     "advancedAnalytics": "Advanced Analytics",
     "upgradeToPro": "Upgrade to Pro",
     "perMonth": "/mo"
+  },
+  "tiptap": {
+    "toolbar": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strikethrough": "Strikethrough",
+      "code": "Code",
+      "clearFormatting": "Clear formatting",
+      "moreFormatting": "More formatting",
+      "textColor": "Text color",
+      "numberedList": "Numbered list",
+      "bulletList": "Bullet list",
+      "lists": "Lists",
+      "codeBlock": "Code block",
+      "blockquote": "Blockquote",
+      "divider": "Divider",
+      "insertElements": "Insert elements",
+      "link": "Link",
+      "image": "Image",
+      "textStyles": "Text styles"
+    },
+    "headings": {
+      "paragraph": "Normal Text",
+      "h1": "Heading 1",
+      "h2": "Heading 2",
+      "h3": "Heading 3",
+      "h4": "Heading 4",
+      "h5": "Heading 5",
+      "h6": "Heading 6"
+    },
+    "colors": {
+      "default": "Default",
+      "gray": "Gray",
+      "blue": "Blue",
+      "teal": "Teal",
+      "green": "Green",
+      "orange": "Orange",
+      "red": "Red",
+      "purple": "Purple",
+      "white": "White",
+      "black": "Black",
+      "boldBlue": "Bold blue",
+      "boldTeal": "Bold teal",
+      "boldGreen": "Bold green",
+      "boldOrange": "Bold orange",
+      "boldRed": "Bold red",
+      "boldPurple": "Bold purple",
+      "blueSubtle": "Blue subtle",
+      "tealSubtle": "Teal subtle",
+      "greenSubtle": "Green subtle",
+      "yellowSubtle": "Yellow subtle",
+      "redSubtle": "Red subtle",
+      "purpleSubtle": "Purple subtle"
+    },
+    "link": {
+        "url": "URL",
+        "enterUrl": "Enter URL",
+        "displayText": "Display Text (optional)",
+        "enterDisplayText": "Enter display text",
+        "openInNewTab": "Open in New Tab",
+        "save": "Save",
+        "insertLink": "Insert link",
+        "copy": "Copy",
+        "copied": "Copied!",
+        "edit": "Edit link",
+        "openNewTab": "Open link in a new tab",
+        "clear": "Clear link"
+    },
+    "image": {
+        "attachLink": "Attach an image link",
+        "submit": "Submit",
+        "uploadComputer": "Upload from your computer",
+        "select": "Select image",
+        "uploadDescription": "Upload an image from your computer"
+    }
   }
 }

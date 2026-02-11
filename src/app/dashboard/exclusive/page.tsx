@@ -13,7 +13,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function ExclusivePage() {
   // Mock plan status
-  const hasProPlan = true; 
+  const hasProPlan = true;
 
   if (!hasProPlan) {
     return (
@@ -51,15 +51,13 @@ export default function ExclusivePage() {
             Exclusive Area
           </h1>
           <p className='text-muted-foreground'>
-            Welcome to the Exclusive Area! This
-            page contains exclusive features for Pro plan users.
+            Welcome to the Exclusive Area! This page contains exclusive features
+            for Pro plan users.
           </p>
         </div>
         <Card>
           <CardHeader>
-            <CardTitle>
-              Thank You for Checking Out the Exclusive Page
-            </CardTitle>
+            <CardTitle>Thank You for Checking Out the Exclusive Page</CardTitle>
             <CardDescription>
               This means you have access to the Pro plan features.
             </CardDescription>

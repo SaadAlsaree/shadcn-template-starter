@@ -22,11 +22,11 @@ export function ProductTable({ data, totalItems }: ProductTableProps) {
   const pageCount = Math.ceil(totalItems / pageSize);
 
   const { table } = useDataTable({
-    data, 
-    columns, 
+    data,
+    columns,
     pageCount: pageCount,
     enableAdvancedFilter: true,
-    shallow: false, 
+    shallow: false,
     debounceMs: 500
   });
 

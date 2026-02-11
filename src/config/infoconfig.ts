@@ -30,7 +30,7 @@ export const workspacesInfoContent: InfobarContent = {
     {
       title: 'Permission Checks',
       description:
-        "This application follows best practices for multi-tenant authentication. Permission checks ensure that users can only access resources for their active organization.",
+        'This application follows best practices for multi-tenant authentication. Permission checks ensure that users can only access resources for their active organization.',
       links: []
     }
   ]
@@ -42,7 +42,7 @@ export const teamInfoContent: InfobarContent = {
     {
       title: 'Overview',
       description:
-        "The Team Management page allows you to manage your workspace team, including members, roles, security settings, and more. This page provides comprehensive organization management.",
+        'The Team Management page allows you to manage your workspace team, including members, roles, security settings, and more. This page provides comprehensive organization management.',
       links: []
     },
     {
@@ -107,7 +107,6 @@ export const billingInfoContent: InfobarContent = {
     }
   ]
 };
-
 
 export const productInfoContent: InfobarContent = {
   title: 'Product Management',

@@ -1,5 +1,5 @@
-import { Slot } from "@radix-ui/react-slot";
-import * as React from "react";
+import { Slot } from '@radix-ui/react-slot';
+import * as React from 'react';
 
 interface UsePendingOptions {
   id?: string;
@@ -9,16 +9,16 @@ interface UsePendingOptions {
 
 interface UsePendingReturn<T extends HTMLElement = HTMLElement> {
   pendingProps: React.HTMLAttributes<T> & {
-    "aria-busy"?: "true";
-    "aria-disabled"?: "true";
-    "data-pending"?: true;
-    "data-disabled"?: true;
+    'aria-busy'?: 'true';
+    'aria-disabled'?: 'true';
+    'data-pending'?: true;
+    'data-disabled'?: true;
   };
   isPending: boolean;
 }
 
 function usePending<T extends HTMLElement = HTMLElement>(
-  options: UsePendingOptions = {},
+  options: UsePendingOptions = {}
 ): UsePendingReturn<T> {
   const { id, isPending = false, disabled = false } = options;
 
@@ -27,25 +27,25 @@ function usePending<T extends HTMLElement = HTMLElement>(
 
   const pendingProps = React.useMemo(() => {
     const props: React.HTMLAttributes<T> & {
-      "aria-busy"?: "true";
-      "aria-disabled"?: "true";
-      "data-pending"?: true;
-      "data-disabled"?: true;
+      'aria-busy'?: 'true';
+      'aria-disabled'?: 'true';
+      'data-pending'?: true;
+      'data-disabled'?: true;
     } = {
-      id: pendingId,
+      id: pendingId
     };
 
     if (isPending) {
-      props["aria-busy"] = "true";
-      props["aria-disabled"] = "true";
-      props["data-pending"] = true;
+      props['aria-busy'] = 'true';
+      props['aria-disabled'] = 'true';
+      props['data-pending'] = true;
 
       const onEventPrevent = (event: React.SyntheticEvent) => {
         event.preventDefault();
       };
 
       const onKeyEventPrevent = (event: React.KeyboardEvent<T>) => {
-        if (event.key === "Enter" || event.key === " ") {
+        if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
         }
       };
@@ -60,7 +60,7 @@ function usePending<T extends HTMLElement = HTMLElement>(
     }
 
     if (disabled) {
-      props["data-disabled"] = true;
+      props['data-disabled'] = true;
     }
 
     return props;
@@ -69,7 +69,7 @@ function usePending<T extends HTMLElement = HTMLElement>(
   return React.useMemo(() => {
     return {
       pendingProps,
-      isPending,
+      isPending
     };
   }, [pendingProps, isPending]);
 }
@@ -88,5 +88,5 @@ function Pending({ id, isPending, disabled, ...props }: PendingProps) {
 export {
   Pending,
   //
-  usePending,
+  usePending
 };

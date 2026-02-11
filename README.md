@@ -4,17 +4,6 @@
 
 <br />
 
-<div align="center">
-  <img src="/public/shadcn-dashboard.png" alt="Shadcn Dashboard Cover" style="max-width: 100%; border-radius: 8px;" />
-</div>
-
-<p align="center">
-  <a href="https://github.com/Kiranism/next-shadcn-dashboard-starter/stargazers"><img src="https://img.shields.io/github/stars/Kiranism/next-shadcn-dashboard-starter?style=social" alt="GitHub stars" /></a>
-  <a href="https://github.com/Kiranism/next-shadcn-dashboard-starter/network/members"><img src="https://img.shields.io/github/forks/Kiranism/next-shadcn-dashboard-starter?style=social" alt="Forks" /></a>
-  <a href="https://github.com/Kiranism/next-shadcn-dashboard-starter/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Kiranism/next-shadcn-dashboard-starter" alt="MIT License" /></a>
-  <img src="https://img.shields.io/badge/Next.js-16-black" alt="Next.js" />
-</p>
-
 ## Overview
 
 This is an **open source admin dashboard starter** built with **Next.js 16, Shadcn UI, TypeScript, and Tailwind CSS**.
@@ -64,7 +53,6 @@ You can use this Next.js + Shadcn UI dashboard starter to build:
 - Analytics dashboards
 - Client project admin panels
 - Boilerplate for new Next.js admin UI projects
-
 
 ## Feature based organization
 
@@ -125,7 +113,6 @@ git clone https://github.com/saadalsaree/shadcn-template-starter.git
 ##### Environment Configuration Setup
 
 To configure the environment for this project, refer to the `env.example.txt` file. This file contains the necessary environment variables required for authentication and error tracking.
-
 
 You should now be able to access the application at http://localhost:3000.
 

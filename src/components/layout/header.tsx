@@ -19,11 +19,11 @@ export default function Header() {
         <div className='hidden md:flex'>
           <SearchInput />
         </div>
-       
+
         <ThemeModeToggle />
         <ConfigDrawer />
 
-         <UserNav />
+        <UserNav />
       </div>
     </header>
   );

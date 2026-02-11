@@ -1,40 +1,40 @@
-"use client";
+'use client';
 
-import { useDirection } from "@radix-ui/react-direction";
-import { Slot } from "@radix-ui/react-slot";
-import { cva } from "class-variance-authority";
-import * as React from "react";
-import { useComposedRefs } from "@/lib/compose-refs";
-import { cn } from "@/lib/utils";
-import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect";
-import { useLazyRef } from "@/hooks/use-lazy-ref";
+import { useDirection } from '@radix-ui/react-direction';
+import { Slot } from '@radix-ui/react-slot';
+import { cva } from 'class-variance-authority';
+import * as React from 'react';
+import { useComposedRefs } from '@/lib/compose-refs';
+import { cn } from '@/lib/utils';
+import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect';
+import { useLazyRef } from '@/hooks/use-lazy-ref';
 
-type Direction = "ltr" | "rtl";
-type Orientation = "vertical" | "horizontal";
-type Variant = "default" | "alternate";
-type Status = "completed" | "active" | "pending";
+type Direction = 'ltr' | 'rtl';
+type Orientation = 'vertical' | 'horizontal';
+type Variant = 'default' | 'alternate';
+type Status = 'completed' | 'active' | 'pending';
 
-interface DivProps extends React.ComponentProps<"div"> {
+interface DivProps extends React.ComponentProps<'div'> {
   asChild?: boolean;
 }
 
 type ItemElement = React.ComponentRef<typeof TimelineItem>;
 
-const ROOT_NAME = "Timeline";
-const ITEM_NAME = "TimelineItem";
-const DOT_NAME = "TimelineDot";
-const CONNECTOR_NAME = "TimelineConnector";
-const CONTENT_NAME = "TimelineContent";
+const ROOT_NAME = 'Timeline';
+const ITEM_NAME = 'TimelineItem';
+const DOT_NAME = 'TimelineDot';
+const CONNECTOR_NAME = 'TimelineConnector';
+const CONTENT_NAME = 'TimelineContent';
 
 function getItemStatus(itemIndex: number, activeIndex?: number): Status {
-  if (activeIndex === undefined) return "pending";
-  if (itemIndex < activeIndex) return "completed";
-  if (itemIndex === activeIndex) return "active";
-  return "pending";
+  if (activeIndex === undefined) return 'pending';
+  if (itemIndex < activeIndex) return 'completed';
+  if (itemIndex === activeIndex) return 'active';
+  return 'pending';
 }
 
 function getSortedEntries(
-  entries: [string, React.RefObject<ItemElement | null>][],
+  entries: [string, React.RefObject<ItemElement | null>][]
 ) {
   return entries.sort((a, b) => {
     const elementA = a[1].current;
@@ -55,7 +55,7 @@ function useStore<T>(selector: (store: Store) => T): T {
 
   const getSnapshot = React.useCallback(
     () => selector(store),
-    [store, selector],
+    [store, selector]
   );
 
   return React.useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
@@ -71,7 +71,7 @@ interface Store {
   notify: () => void;
   onItemRegister: (
     id: string,
-    ref: React.RefObject<ItemElement | null>,
+    ref: React.RefObject<ItemElement | null>
   ) => void;
   onItemUnregister: (id: string) => void;
   getNextItemStatus: (id: string, activeIndex?: number) => Status | undefined;
@@ -106,45 +106,45 @@ function useTimelineContext(consumerName: string) {
 }
 
 const timelineVariants = cva(
-  "relative flex [--timeline-connector-thickness:0.125rem] [--timeline-dot-size:0.875rem]",
+  'relative flex [--timeline-connector-thickness:0.125rem] [--timeline-dot-size:0.875rem]',
   {
     variants: {
       orientation: {
-        vertical: "flex-col",
-        horizontal: "flex-row items-start",
+        vertical: 'flex-col',
+        horizontal: 'flex-row items-start'
       },
       variant: {
-        default: "",
-        alternate: "",
-      },
+        default: '',
+        alternate: ''
+      }
     },
     compoundVariants: [
       {
-        orientation: "vertical",
-        variant: "default",
-        class: "gap-6",
+        orientation: 'vertical',
+        variant: 'default',
+        class: 'gap-6'
       },
       {
-        orientation: "horizontal",
-        variant: "default",
-        class: "gap-8",
+        orientation: 'horizontal',
+        variant: 'default',
+        class: 'gap-8'
       },
       {
-        orientation: "vertical",
-        variant: "alternate",
-        class: "relative w-full gap-3",
+        orientation: 'vertical',
+        variant: 'alternate',
+        class: 'relative w-full gap-3'
       },
       {
-        orientation: "horizontal",
-        variant: "alternate",
-        class: "items-center gap-4",
-      },
+        orientation: 'horizontal',
+        variant: 'alternate',
+        class: 'items-center gap-4'
+      }
     ],
     defaultVariants: {
-      orientation: "vertical",
-      variant: "default",
-    },
-  },
+      orientation: 'vertical',
+      variant: 'default'
+    }
+  }
 );
 
 interface TimelineProps extends DivProps {
@@ -156,8 +156,8 @@ interface TimelineProps extends DivProps {
 
 function Timeline(props: TimelineProps) {
   const {
-    orientation = "vertical",
-    variant = "default",
+    orientation = 'vertical',
+    variant = 'default',
     dir: dirProp,
     activeIndex,
     asChild,
@@ -169,7 +169,7 @@ function Timeline(props: TimelineProps) {
 
   const listenersRef = useLazyRef(() => new Set<() => void>());
   const stateRef = useLazyRef<StoreState>(() => ({
-    items: new Map(),
+    items: new Map()
   }));
 
   const store = React.useMemo<Store>(() => {
@@ -186,7 +186,7 @@ function Timeline(props: TimelineProps) {
       },
       onItemRegister: (
         id: string,
-        ref: React.RefObject<ItemElement | null>,
+        ref: React.RefObject<ItemElement | null>
       ) => {
         stateRef.current.items.set(id, ref);
         store.notify();
@@ -211,7 +211,7 @@ function Timeline(props: TimelineProps) {
         const entries = Array.from(stateRef.current.items.entries());
         const sortedEntries = getSortedEntries(entries);
         return sortedEntries.findIndex(([key]) => key === id);
-      },
+      }
     };
   }, [listenersRef, stateRef]);
 
@@ -220,20 +220,20 @@ function Timeline(props: TimelineProps) {
       dir,
       orientation,
       variant,
-      activeIndex,
+      activeIndex
     }),
-    [dir, orientation, variant, activeIndex],
+    [dir, orientation, variant, activeIndex]
   );
 
-  const RootPrimitive = asChild ? Slot : "div";
+  const RootPrimitive = asChild ? Slot : 'div';
 
   return (
     <StoreContext.Provider value={store}>
       <TimelineContext.Provider value={contextValue}>
         <RootPrimitive
-          role="list"
+          role='list'
           aria-orientation={orientation}
-          data-slot="timeline"
+          data-slot='timeline'
           data-orientation={orientation}
           data-variant={variant}
           dir={dir}
@@ -262,55 +262,55 @@ function useTimelineItemContext(consumerName: string) {
   return context;
 }
 
-const timelineItemVariants = cva("relative flex", {
+const timelineItemVariants = cva('relative flex', {
   variants: {
     orientation: {
-      vertical: "",
-      horizontal: "",
+      vertical: '',
+      horizontal: ''
     },
     variant: {
-      default: "",
-      alternate: "",
+      default: '',
+      alternate: ''
     },
     isAlternateRight: {
-      true: "",
-      false: "",
-    },
+      true: '',
+      false: ''
+    }
   },
   compoundVariants: [
     {
-      orientation: "vertical",
-      variant: "default",
-      class: "gap-3 pb-8 last:pb-0",
+      orientation: 'vertical',
+      variant: 'default',
+      class: 'gap-3 pb-8 last:pb-0'
     },
     {
-      orientation: "horizontal",
-      variant: "default",
-      class: "flex-col gap-3",
+      orientation: 'horizontal',
+      variant: 'default',
+      class: 'flex-col gap-3'
     },
     {
-      orientation: "vertical",
-      variant: "alternate",
+      orientation: 'vertical',
+      variant: 'alternate',
       isAlternateRight: false,
-      class: "w-1/2 gap-3 pr-6 pb-12 last:pb-0",
+      class: 'w-1/2 gap-3 pr-6 pb-12 last:pb-0'
     },
     {
-      orientation: "vertical",
-      variant: "alternate",
+      orientation: 'vertical',
+      variant: 'alternate',
       isAlternateRight: true,
-      class: "ml-auto w-1/2 flex-row-reverse gap-3 pb-12 pl-6 last:pb-0",
+      class: 'ml-auto w-1/2 flex-row-reverse gap-3 pb-12 pl-6 last:pb-0'
     },
     {
-      orientation: "horizontal",
-      variant: "alternate",
-      class: "grid min-w-0 grid-rows-[1fr_auto_1fr] gap-3",
-    },
+      orientation: 'horizontal',
+      variant: 'alternate',
+      class: 'grid min-w-0 grid-rows-[1fr_auto_1fr] gap-3'
+    }
   ],
   defaultVariants: {
-    orientation: "vertical",
-    variant: "default",
-    isAlternateRight: false,
-  },
+    orientation: 'vertical',
+    variant: 'default',
+    isAlternateRight: false
+  }
 });
 
 function TimelineItem(props: DivProps) {
@@ -338,24 +338,24 @@ function TimelineItem(props: DivProps) {
     };
   }, [id, store]);
 
-  const isAlternateRight = variant === "alternate" && itemIndex % 2 === 1;
+  const isAlternateRight = variant === 'alternate' && itemIndex % 2 === 1;
 
   const itemContextValue = React.useMemo<TimelineItemContextValue>(
     () => ({ id: itemId, status, isAlternateRight }),
-    [itemId, status, isAlternateRight],
+    [itemId, status, isAlternateRight]
   );
 
-  const ItemPrimitive = asChild ? Slot : "div";
+  const ItemPrimitive = asChild ? Slot : 'div';
 
   return (
     <TimelineItemContext.Provider value={itemContextValue}>
       <ItemPrimitive
-        role="listitem"
-        aria-current={status === "active" ? "step" : undefined}
-        data-slot="timeline-item"
+        role='listitem'
+        aria-current={status === 'active' ? 'step' : undefined}
+        data-slot='timeline-item'
         data-status={status}
         data-orientation={orientation}
-        data-alternate-right={isAlternateRight ? "" : undefined}
+        data-alternate-right={isAlternateRight ? '' : undefined}
         id={itemId}
         dir={dir}
         {...itemProps}
@@ -365,54 +365,54 @@ function TimelineItem(props: DivProps) {
             orientation,
             variant,
             isAlternateRight,
-            className,
-          }),
+            className
+          })
         )}
       />
     </TimelineItemContext.Provider>
   );
 }
 
-const timelineContentVariants = cva("flex-1", {
+const timelineContentVariants = cva('flex-1', {
   variants: {
     orientation: {
-      vertical: "",
-      horizontal: "",
+      vertical: '',
+      horizontal: ''
     },
     variant: {
-      default: "",
-      alternate: "",
+      default: '',
+      alternate: ''
     },
     isAlternateRight: {
-      true: "",
-      false: "",
-    },
+      true: '',
+      false: ''
+    }
   },
   compoundVariants: [
     {
-      variant: "alternate",
-      orientation: "vertical",
+      variant: 'alternate',
+      orientation: 'vertical',
       isAlternateRight: false,
-      class: "text-right",
+      class: 'text-right'
     },
     {
-      variant: "alternate",
-      orientation: "horizontal",
+      variant: 'alternate',
+      orientation: 'horizontal',
       isAlternateRight: false,
-      class: "row-start-3 pt-2",
+      class: 'row-start-3 pt-2'
     },
     {
-      variant: "alternate",
-      orientation: "horizontal",
+      variant: 'alternate',
+      orientation: 'horizontal',
       isAlternateRight: true,
-      class: "row-start-1 pb-2",
-    },
+      class: 'row-start-1 pb-2'
+    }
   ],
   defaultVariants: {
-    orientation: "vertical",
-    variant: "default",
-    isAlternateRight: false,
-  },
+    orientation: 'vertical',
+    variant: 'default',
+    isAlternateRight: false
+  }
 });
 
 function TimelineContent(props: DivProps) {
@@ -421,11 +421,11 @@ function TimelineContent(props: DivProps) {
   const { variant, orientation } = useTimelineContext(CONTENT_NAME);
   const { status, isAlternateRight } = useTimelineItemContext(CONTENT_NAME);
 
-  const ContentPrimitive = asChild ? Slot : "div";
+  const ContentPrimitive = asChild ? Slot : 'div';
 
   return (
     <ContentPrimitive
-      data-slot="timeline-content"
+      data-slot='timeline-content'
       data-status={status}
       {...contentProps}
       className={cn(
@@ -433,73 +433,73 @@ function TimelineContent(props: DivProps) {
           orientation,
           variant,
           isAlternateRight,
-          className,
-        }),
+          className
+        })
       )}
     />
   );
 }
 
 const timelineDotVariants = cva(
-  "relative z-10 flex size-[var(--timeline-dot-size)] shrink-0 items-center justify-center rounded-full border-2 bg-background",
+  'relative z-10 flex size-[var(--timeline-dot-size)] shrink-0 items-center justify-center rounded-full border-2 bg-background',
   {
     variants: {
       status: {
-        completed: "border-primary",
-        active: "border-primary",
-        pending: "border-border",
+        completed: 'border-primary',
+        active: 'border-primary',
+        pending: 'border-border'
       },
       orientation: {
-        vertical: "",
-        horizontal: "",
+        vertical: '',
+        horizontal: ''
       },
       variant: {
-        default: "",
-        alternate: "",
+        default: '',
+        alternate: ''
       },
       isAlternateRight: {
-        true: "",
-        false: "",
-      },
+        true: '',
+        false: ''
+      }
     },
     compoundVariants: [
       {
-        variant: "alternate",
-        orientation: "vertical",
+        variant: 'alternate',
+        orientation: 'vertical',
         isAlternateRight: false,
         class:
-          "absolute -right-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background",
+          'absolute -right-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background'
       },
       {
-        variant: "alternate",
-        orientation: "vertical",
+        variant: 'alternate',
+        orientation: 'vertical',
         isAlternateRight: true,
         class:
-          "absolute -left-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background",
+          'absolute -left-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background'
       },
       {
-        variant: "alternate",
-        orientation: "horizontal",
-        class: "row-start-2 bg-background",
+        variant: 'alternate',
+        orientation: 'horizontal',
+        class: 'row-start-2 bg-background'
       },
       {
-        variant: "alternate",
-        status: "completed",
-        class: "bg-background",
+        variant: 'alternate',
+        status: 'completed',
+        class: 'bg-background'
       },
       {
-        variant: "alternate",
-        status: "active",
-        class: "bg-background",
-      },
+        variant: 'alternate',
+        status: 'active',
+        class: 'bg-background'
+      }
     ],
     defaultVariants: {
-      status: "pending",
-      orientation: "vertical",
-      variant: "default",
-      isAlternateRight: false,
-    },
-  },
+      status: 'pending',
+      orientation: 'vertical',
+      variant: 'default',
+      isAlternateRight: false
+    }
+  }
 );
 
 function TimelineDot(props: DivProps) {
@@ -508,11 +508,11 @@ function TimelineDot(props: DivProps) {
   const { orientation, variant } = useTimelineContext(DOT_NAME);
   const { status, isAlternateRight } = useTimelineItemContext(DOT_NAME);
 
-  const DotPrimitive = asChild ? Slot : "div";
+  const DotPrimitive = asChild ? Slot : 'div';
 
   return (
     <DotPrimitive
-      data-slot="timeline-dot"
+      data-slot='timeline-dot'
       data-status={status}
       data-orientation={orientation}
       {...dotProps}
@@ -522,72 +522,72 @@ function TimelineDot(props: DivProps) {
           orientation,
           variant,
           isAlternateRight,
-          className,
-        }),
+          className
+        })
       )}
     />
   );
 }
 
-const timelineConnectorVariants = cva("absolute z-0", {
+const timelineConnectorVariants = cva('absolute z-0', {
   variants: {
     isCompleted: {
-      true: "bg-primary",
-      false: "bg-border",
+      true: 'bg-primary',
+      false: 'bg-border'
     },
     orientation: {
-      vertical: "",
-      horizontal: "",
+      vertical: '',
+      horizontal: ''
     },
     variant: {
-      default: "",
-      alternate: "",
+      default: '',
+      alternate: ''
     },
     isAlternateRight: {
-      true: "",
-      false: "",
-    },
+      true: '',
+      false: ''
+    }
   },
   compoundVariants: [
     {
-      orientation: "vertical",
-      variant: "default",
+      orientation: 'vertical',
+      variant: 'default',
       class:
-        "start-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] top-3 h-[calc(100%+0.5rem)] w-[var(--timeline-connector-thickness)]",
+        'start-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] top-3 h-[calc(100%+0.5rem)] w-[var(--timeline-connector-thickness)]'
     },
     {
-      orientation: "horizontal",
-      variant: "default",
+      orientation: 'horizontal',
+      variant: 'default',
       class:
-        "start-3 top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] h-[var(--timeline-connector-thickness)] w-[calc(100%+0.5rem)]",
+        'start-3 top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] h-[var(--timeline-connector-thickness)] w-[calc(100%+0.5rem)]'
     },
     {
-      orientation: "vertical",
-      variant: "alternate",
+      orientation: 'vertical',
+      variant: 'alternate',
       isAlternateRight: false,
       class:
-        "top-2 -right-[calc(var(--timeline-connector-thickness)/2)] h-full w-[var(--timeline-connector-thickness)]",
+        'top-2 -right-[calc(var(--timeline-connector-thickness)/2)] h-full w-[var(--timeline-connector-thickness)]'
     },
     {
-      orientation: "vertical",
-      variant: "alternate",
+      orientation: 'vertical',
+      variant: 'alternate',
       isAlternateRight: true,
       class:
-        "top-2 -left-[calc(var(--timeline-connector-thickness)/2)] h-full w-[var(--timeline-connector-thickness)]",
+        'top-2 -left-[calc(var(--timeline-connector-thickness)/2)] h-full w-[var(--timeline-connector-thickness)]'
     },
     {
-      orientation: "horizontal",
-      variant: "alternate",
+      orientation: 'horizontal',
+      variant: 'alternate',
       class:
-        "top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] left-3 row-start-2 h-[var(--timeline-connector-thickness)] w-[calc(100%+0.5rem)]",
-    },
+        'top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] left-3 row-start-2 h-[var(--timeline-connector-thickness)] w-[calc(100%+0.5rem)]'
+    }
   ],
   defaultVariants: {
     isCompleted: false,
-    orientation: "vertical",
-    variant: "default",
-    isAlternateRight: false,
-  },
+    orientation: 'vertical',
+    variant: 'default',
+    isAlternateRight: false
+  }
 });
 
 interface TimelineConnectorProps extends DivProps {
@@ -603,7 +603,7 @@ function TimelineConnector(props: TimelineConnectorProps) {
     useTimelineItemContext(CONNECTOR_NAME);
 
   const nextItemStatus = useStore((state) =>
-    state.getNextItemStatus(id, activeIndex),
+    state.getNextItemStatus(id, activeIndex)
   );
 
   const isLastItem = nextItemStatus === undefined;
@@ -611,15 +611,15 @@ function TimelineConnector(props: TimelineConnectorProps) {
   if (!forceMount && isLastItem) return null;
 
   const isConnectorCompleted =
-    nextItemStatus === "completed" || nextItemStatus === "active";
+    nextItemStatus === 'completed' || nextItemStatus === 'active';
 
-  const ConnectorPrimitive = asChild ? Slot : "div";
+  const ConnectorPrimitive = asChild ? Slot : 'div';
 
   return (
     <ConnectorPrimitive
-      aria-hidden="true"
-      data-slot="timeline-connector"
-      data-completed={isConnectorCompleted ? "" : undefined}
+      aria-hidden='true'
+      data-slot='timeline-connector'
+      data-completed={isConnectorCompleted ? '' : undefined}
       data-status={status}
       data-orientation={orientation}
       {...connectorProps}
@@ -629,8 +629,8 @@ function TimelineConnector(props: TimelineConnectorProps) {
           orientation,
           variant,
           isAlternateRight,
-          className,
-        }),
+          className
+        })
       )}
     />
   );
@@ -639,13 +639,13 @@ function TimelineConnector(props: TimelineConnectorProps) {
 function TimelineHeader(props: DivProps) {
   const { asChild, className, ...headerProps } = props;
 
-  const HeaderPrimitive = asChild ? Slot : "div";
+  const HeaderPrimitive = asChild ? Slot : 'div';
 
   return (
     <HeaderPrimitive
-      data-slot="timeline-header"
+      data-slot='timeline-header'
       {...headerProps}
-      className={cn("flex flex-col gap-1", className)}
+      className={cn('flex flex-col gap-1', className)}
     />
   );
 }
@@ -653,13 +653,13 @@ function TimelineHeader(props: DivProps) {
 function TimelineTitle(props: DivProps) {
   const { asChild, className, ...titleProps } = props;
 
-  const TitlePrimitive = asChild ? Slot : "div";
+  const TitlePrimitive = asChild ? Slot : 'div';
 
   return (
     <TitlePrimitive
-      data-slot="timeline-title"
+      data-slot='timeline-title'
       {...titleProps}
-      className={cn("font-semibold leading-none", className)}
+      className={cn('leading-none font-semibold', className)}
     />
   );
 }
@@ -667,31 +667,31 @@ function TimelineTitle(props: DivProps) {
 function TimelineDescription(props: DivProps) {
   const { asChild, className, ...descriptionProps } = props;
 
-  const DescriptionPrimitive = asChild ? Slot : "div";
+  const DescriptionPrimitive = asChild ? Slot : 'div';
 
   return (
     <DescriptionPrimitive
-      data-slot="timeline-description"
+      data-slot='timeline-description'
       {...descriptionProps}
-      className={cn("text-muted-foreground text-sm", className)}
+      className={cn('text-muted-foreground text-sm', className)}
     />
   );
 }
 
-interface TimelineTimeProps extends React.ComponentProps<"time"> {
+interface TimelineTimeProps extends React.ComponentProps<'time'> {
   asChild?: boolean;
 }
 
 function TimelineTime(props: TimelineTimeProps) {
   const { asChild, className, ...timeProps } = props;
 
-  const TimePrimitive = asChild ? Slot : "time";
+  const TimePrimitive = asChild ? Slot : 'time';
 
   return (
     <TimePrimitive
-      data-slot="timeline-time"
+      data-slot='timeline-time'
       {...timeProps}
-      className={cn("text-muted-foreground text-xs", className)}
+      className={cn('text-muted-foreground text-xs', className)}
     />
   );
 }
@@ -707,5 +707,5 @@ export {
   TimelineDescription,
   TimelineTime,
   //
-  type TimelineProps,
+  type TimelineProps
 };

@@ -42,7 +42,7 @@
   "nav": {
     "dashboard": "لوحة التحكم",
     "overview": "نظرة عامة",
-    "products": "المنتجات",
+    "product": "المنتجات",
     "workspaces": "مساحات العمل",
     "teams": "الفريق",
     "kanban": "كانبان",
@@ -62,7 +62,7 @@
     "recent": "النشاط الأخير",
     "quickActions": "إجراءات سريعة"
   },
-  "products": {
+  "product": {
     "title": "المنتجات",
     "name": "الاسم",
     "price": "السعر",
@@ -291,5 +291,81 @@
     "advancedAnalytics": "تحليلات متقدمة",
     "upgradeToPro": "ترقية إلى احترافي",
     "perMonth": "/شهر"
+  },
+  "tiptap": {
+    "toolbar": {
+      "bold": "عريض",
+      "italic": "مائل",
+      "underline": "تسطير",
+      "strikethrough": "شطب",
+      "code": "كود",
+      "clearFormatting": "مسح التنسيق",
+      "moreFormatting": "مزيد من التنسيقات",
+      "textColor": "لون النص",
+      "numberedList": "قائمة مرقمة",
+      "bulletList": "قائمة نقطية",
+      "lists": "القوائم",
+      "codeBlock": "كتلة كود",
+      "blockquote": "اقتباس",
+      "divider": "فاصل",
+      "insertElements": "إدراج عناصر",
+      "link": "رابط",
+      "image": "صورة",
+      "textStyles": "أنماط النص"
+    },
+    "headings": {
+      "paragraph": "نص عادي",
+      "h1": "عنوان 1",
+      "h2": "عنوان 2",
+      "h3": "عنوان 3",
+      "h4": "عنوان 4",
+      "h5": "عنوان 5",
+      "h6": "عنوان 6"
+    },
+    "colors": {
+      "default": "افتراضي",
+      "gray": "رمادي",
+      "blue": "أزرق",
+      "teal": "فيروزي",
+      "green": "أخضر",
+      "orange": "برتقالي",
+      "red": "أحمر",
+      "purple": "بنفسجي",
+      "white": "أبيض",
+      "black": "أسود",
+      "boldBlue": "أزرق غامق",
+      "boldTeal": "فيروزي غامق",
+      "boldGreen": "أخضر غامق",
+      "boldOrange": "برتقالي غامق",
+      "boldRed": "أحمر غامق",
+      "boldPurple": "بنفسجي غامق",
+      "blueSubtle": "أزرق باهت",
+      "tealSubtle": "فيروزي باهت",
+      "greenSubtle": "أخضر باهت",
+      "yellowSubtle": "أصفر باهت",
+      "redSubtle": "أحمر باهت",
+      "purpleSubtle": "بنفسجي باهت"
+    },
+    "link": {
+        "url": "الرابط",
+        "enterUrl": "أدخل الرابط",
+        "displayText": "نص العرض (اختياري)",
+        "enterDisplayText": "أدخل نص العرض",
+        "openInNewTab": "فتح في علامة تبويب جديدة",
+        "save": "حفظ",
+        "insertLink": "إدراج رابط",
+        "copy": "نسخ",
+        "copied": "تم النسخ!",
+        "edit": "تعديل الرابط",
+        "openNewTab": "فتح الرابط في علامة تبويب جديدة",
+        "clear": "مسح الرابط"
+    },
+    "image": {
+        "attachLink": "إرفاق رابط صورة",
+        "submit": "إرسال",
+        "uploadComputer": "رفع من جهازك",
+        "select": "اختر صورة",
+        "uploadDescription": "رفع صورة من جهاز الكمبيوتر الخاص بك"
+    }
   }
 }

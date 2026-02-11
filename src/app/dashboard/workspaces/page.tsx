@@ -12,9 +12,13 @@ import {
 } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
 import { useI18n } from '@/components/providers/i18n-provider';
+import { MinimalTiptapEditor } from '@/components/ui/minimal-tiptap';
+import { useState } from 'react';
+import { Content } from '@tiptap/react';
 
 export default function WorkspacesPage() {
   const router = useRouter();
+  const [value, setValue] = useState<Content>('');
   const { t } = useI18n();
 
   const organizations = [
@@ -57,6 +61,18 @@ export default function WorkspacesPage() {
             </Card>
           ))}
         </div>
+
+        <MinimalTiptapEditor
+          value={value}
+          onChange={setValue}
+          className='w-full'
+          editorContentClassName='p-5'
+          output='html'
+          placeholder='Enter your description...'
+          autofocus={true}
+          editable={true}
+          editorClassName='focus:outline-hidden'
+        />
       </div>
     </PageContainer>
   );

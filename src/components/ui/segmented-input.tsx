@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useDirection } from "@radix-ui/react-direction";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import * as React from "react";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { useDirection } from '@radix-ui/react-direction';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
-const ROOT_NAME = "SegmentedInput";
-const ITEM_NAME = "SegmentedInputItem";
+const ROOT_NAME = 'SegmentedInput';
+const ITEM_NAME = 'SegmentedInputItem';
 
-type Direction = "ltr" | "rtl";
-type Orientation = "horizontal" | "vertical";
-type Size = "default" | "sm" | "lg";
-type Position = "isolated" | "first" | "middle" | "last";
+type Direction = 'ltr' | 'rtl';
+type Orientation = 'horizontal' | 'vertical';
+type Size = 'default' | 'sm' | 'lg';
+type Position = 'isolated' | 'first' | 'middle' | 'last';
 
 interface SegmentedInputContextValue {
   dir?: Direction;
@@ -35,7 +35,7 @@ function useSegmentedInputContext(consumerName: string) {
   return context;
 }
 
-interface SegmentedInputProps extends React.ComponentProps<"div"> {
+interface SegmentedInputProps extends React.ComponentProps<'div'> {
   dir?: Direction;
   orientation?: Orientation;
   size?: Size;
@@ -47,9 +47,9 @@ interface SegmentedInputProps extends React.ComponentProps<"div"> {
 
 function SegmentedInput(props: SegmentedInputProps) {
   const {
-    size = "default",
+    size = 'default',
     dir: dirProp,
-    orientation = "horizontal",
+    orientation = 'horizontal',
     children,
     className,
     asChild,
@@ -68,9 +68,9 @@ function SegmentedInput(props: SegmentedInputProps) {
       size,
       disabled,
       invalid,
-      required,
+      required
     }),
-    [dir, orientation, size, disabled, invalid, required],
+    [dir, orientation, size, disabled, invalid, required]
   );
 
   const childrenArray = React.Children.toArray(children);
@@ -82,13 +82,13 @@ function SegmentedInput(props: SegmentedInputProps) {
         let position: Position;
 
         if (childrenCount === 1) {
-          position = "isolated";
+          position = 'isolated';
         } else if (index === 0) {
-          position = "first";
+          position = 'first';
         } else if (index === childrenCount - 1) {
-          position = "last";
+          position = 'last';
         } else {
-          position = "middle";
+          position = 'middle';
         }
 
         return React.cloneElement(child, { position });
@@ -97,24 +97,24 @@ function SegmentedInput(props: SegmentedInputProps) {
     return child;
   });
 
-  const RootPrimitive = asChild ? Slot : "div";
+  const RootPrimitive = asChild ? Slot : 'div';
 
   return (
     <SegmentedInputContext.Provider value={contextValue}>
       <RootPrimitive
-        role="group"
+        role='group'
         aria-orientation={orientation}
-        data-slot="segmented-input"
+        data-slot='segmented-input'
         data-orientation={orientation}
-        data-disabled={disabled ? "" : undefined}
-        data-invalid={invalid ? "" : undefined}
-        data-required={required ? "" : undefined}
+        data-disabled={disabled ? '' : undefined}
+        data-invalid={invalid ? '' : undefined}
+        data-required={required ? '' : undefined}
         dir={dir}
         {...rootProps}
         className={cn(
-          "flex",
-          orientation === "horizontal" ? "flex-row" : "flex-col",
-          className,
+          'flex',
+          orientation === 'horizontal' ? 'flex-row' : 'flex-col',
+          className
         )}
       >
         {segmentedInputItems}
@@ -123,51 +123,51 @@ function SegmentedInput(props: SegmentedInputProps) {
   );
 }
 
-const segmentedInputItemVariants = cva("", {
+const segmentedInputItemVariants = cva('', {
   variants: {
     position: {
-      isolated: "",
-      first: "rounded-e-none",
-      middle: "-ms-px rounded-none border-s-0",
-      last: "-ms-px rounded-s-none border-s-0",
+      isolated: '',
+      first: 'rounded-e-none',
+      middle: '-ms-px rounded-none border-s-0',
+      last: '-ms-px rounded-s-none border-s-0'
     },
     orientation: {
-      horizontal: "",
-      vertical: "",
+      horizontal: '',
+      vertical: ''
     },
     size: {
-      sm: "h-8 px-2 text-xs",
-      default: "h-9 px-3",
-      lg: "h-11 px-4",
-    },
+      sm: 'h-8 px-2 text-xs',
+      default: 'h-9 px-3',
+      lg: 'h-11 px-4'
+    }
   },
   compoundVariants: [
     {
-      position: "first",
-      orientation: "vertical",
-      class: "ms-0 rounded-e-md rounded-b-none border-l",
+      position: 'first',
+      orientation: 'vertical',
+      class: 'ms-0 rounded-e-md rounded-b-none border-l'
     },
     {
-      position: "middle",
-      orientation: "vertical",
-      class: "ms-0 -mt-px rounded-none border-t-0 border-l",
+      position: 'middle',
+      orientation: 'vertical',
+      class: 'ms-0 -mt-px rounded-none border-t-0 border-l'
     },
     {
-      position: "last",
-      orientation: "vertical",
-      class: "ms-0 -mt-px rounded-s-md rounded-t-none border-t-0 border-l",
-    },
+      position: 'last',
+      orientation: 'vertical',
+      class: 'ms-0 -mt-px rounded-s-md rounded-t-none border-t-0 border-l'
+    }
   ],
   defaultVariants: {
-    position: "isolated",
-    orientation: "horizontal",
-    size: "default",
-  },
+    position: 'isolated',
+    orientation: 'horizontal',
+    size: 'default'
+  }
 });
 
 interface SegmentedInputItemProps
-  extends React.ComponentProps<"input">,
-    Omit<VariantProps<typeof segmentedInputItemVariants>, "size"> {
+  extends React.ComponentProps<'input'>,
+    Omit<VariantProps<typeof segmentedInputItemVariants>, 'size'> {
   asChild?: boolean;
 }
 
@@ -185,12 +185,12 @@ function SegmentedInputItem(props: SegmentedInputItemProps) {
     <ItemPrimitive
       aria-invalid={context.invalid}
       aria-required={isRequired}
-      data-disabled={isDisabled ? "" : undefined}
-      data-invalid={context.invalid ? "" : undefined}
+      data-disabled={isDisabled ? '' : undefined}
+      data-invalid={context.invalid ? '' : undefined}
       data-orientation={context.orientation}
       data-position={position}
-      data-required={isRequired ? "" : undefined}
-      data-slot="segmented-input-item"
+      data-required={isRequired ? '' : undefined}
+      data-slot='segmented-input-item'
       disabled={isDisabled}
       required={isRequired}
       {...inputProps}
@@ -199,8 +199,8 @@ function SegmentedInputItem(props: SegmentedInputItemProps) {
           position,
           orientation: context.orientation,
           size: context.size,
-          className,
-        }),
+          className
+        })
       )}
     />
   );
@@ -210,5 +210,5 @@ export {
   SegmentedInput,
   SegmentedInputItem,
   //
-  type SegmentedInputProps,
+  type SegmentedInputProps
 };

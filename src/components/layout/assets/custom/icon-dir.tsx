@@ -1,9 +1,9 @@
-import { type SVGProps } from 'react'
-import { cn } from '@/lib/utils'
+import { type SVGProps } from 'react';
+import { cn } from '@/lib/utils';
 
 type IconDirProps = SVGProps<SVGSVGElement> & {
-  dir: "ltr" | "rtl"
-}
+  dir: 'ltr' | 'rtl';
+};
 
 export function IconDir({ dir, className, ...props }: IconDirProps) {
   return (
@@ -105,5 +105,5 @@ export function IconDir({ dir, className, ...props }: IconDirProps) {
         strokeMiterlimit={10}
       />
     </svg>
-  )
+  );
 }

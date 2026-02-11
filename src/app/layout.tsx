@@ -35,7 +35,6 @@ export default async function RootLayout({
 
   return (
     <html
-     
       suppressHydrationWarning
       data-theme={themeToApply}
       className={fontVariables}

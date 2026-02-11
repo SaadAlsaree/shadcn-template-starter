@@ -31,12 +31,22 @@ export function OrgSwitcher() {
       {
         id: 'mem_1',
         role: 'admin',
-        organization: { id: 'org_1', name: 'Acme Inc', imageUrl: '', hasImage: false }
+        organization: {
+          id: 'org_1',
+          name: 'Acme Inc',
+          imageUrl: '',
+          hasImage: false
+        }
       },
       {
         id: 'mem_2',
         role: 'member',
-        organization: { id: 'org_2', name: 'Globex Corp', imageUrl: '', hasImage: false }
+        organization: {
+          id: 'org_2',
+          name: 'Globex Corp',
+          imageUrl: '',
+          hasImage: false
+        }
       }
     ]
   };
@@ -50,7 +60,8 @@ export function OrgSwitcher() {
     (membership) => membership.organization.id === orgId
   )?.organization;
 
-  const displayOrganization = activeOrganization || userMemberships.data[0]?.organization;
+  const displayOrganization =
+    activeOrganization || userMemberships.data[0]?.organization;
 
   if (!displayOrganization) {
     return null;

@@ -6,7 +6,6 @@ import { LayoutProvider, useLayout } from '@/contexts/layout-context';
 import { UserProvider } from '@/contexts/user-context';
 import { DirectionProvider } from '@/components/ui/direction';
 
-
 export default function Providers({
   activeThemeValue,
   children
@@ -19,9 +18,7 @@ export default function Providers({
       <I18nProvider>
         <LayoutProvider>
           <UserProvider>
-            <DirectionWrapper>
-              {children}
-            </DirectionWrapper>
+            <DirectionWrapper>{children}</DirectionWrapper>
           </UserProvider>
         </LayoutProvider>
       </I18nProvider>
@@ -37,4 +34,3 @@ function DirectionWrapper({ children }: { children: React.ReactNode }) {
     </DirectionProvider>
   );
 }
-
